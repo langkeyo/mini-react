@@ -1,3 +1,4 @@
+// v1.0
 // // MyReact.js
 // // 全局变量，存状态
 // let wipRoot = null // 暂时不用，先不管

@@ -5,18 +5,19 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 // App.jsx
-/** @jsx MyReact.createElement */
-// 👆这行注释告诉 Babel：遇到 JSX，请调用 MyReact.createElement，别调用 React.createElement
+/** @jsx createElement */
+// 👆这行注释告诉 Babel：遇到 JSX，请调用 createElement，别调用 React.createElement
 
-import * as MyReact from './MyReact.js';
+import { createElement, render, useEffect, useState } from './MyReact/index.js';
 function Counter() {
-  var _MyReact$useState = MyReact.useState(0),
-    _MyReact$useState2 = _slicedToArray(_MyReact$useState, 2),
-    count = _MyReact$useState2[0],
-    setCount = _MyReact$useState2[1];
-  return MyReact.createElement("div", null, MyReact.createElement("h1", {
-    style: true
-  }, "Counter"), MyReact.createElement("button", {
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    count = _useState2[0],
+    setCount = _useState2[1];
+  useEffect(function () {
+    console.log('副作用执行了！count 变成了', count);
+  }, [count]);
+  return createElement("div", null, createElement("h1", null, "Counter"), createElement("button", {
     className: "button",
     onClick: function onClick() {
       return setCount(function (c) {
@@ -26,12 +27,12 @@ function Counter() {
   }, "\u70B9\u6211 \u4E0D\u4F1A\u589E\u52A0\uFF0C\u4F1A\u5361\u4F4F\uFF01 ", count));
 }
 function App() {
-  return MyReact.createElement("div", {
+  return createElement("div", {
     className: "app"
-  }, MyReact.createElement("h1", {
+  }, createElement("h1", {
     style: {
       color: 'yellow'
     }
-  }, "Bug \u6F14\u793A\u73B0\u573A"), MyReact.createElement(Counter, null));
+  }, "Bug \u6F14\u793A\u73B0\u573A"), createElement(Counter, null));
 }
-MyReact.render(MyReact.createElement(App, null), document.getElementById('root'));
+render(createElement(App, null), document.getElementById('root'));
