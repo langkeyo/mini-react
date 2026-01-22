@@ -32,7 +32,7 @@ export function memo(component, propsAreEqual) {
   }
 }
 
-export function Fragment() {}
+export const Fragment = (props) => props.children
 
 export { createElement, render, useState, useEffect, useMemo, useCallback }
 export default MyReact

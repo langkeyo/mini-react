@@ -1,6 +1,7 @@
 {
-  "name": "myreact",
-  "version": "0.1.0",
+  "name": "@langkeyo/myreact",
+  "version": "0.1.1",
   "main": "index.js",
-  "type": "module"
+  "type": "module",
+  "license": "MIT"
 }
