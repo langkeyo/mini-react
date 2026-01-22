@@ -42,3 +42,11 @@ h1 {
   background-color: #ff4500;
   transform: scale(0.95);
 }
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}

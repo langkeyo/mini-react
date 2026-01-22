@@ -17,8 +17,15 @@ export function createDom(element) {
         const eventType = name.toLowerCase().substring(2)
         dom.addEventListener(eventType, element.props[name])
       }
-      if (name === 'className' && typeof element.props[name] === 'object') {
-        Object.assign(dom.classList, element.props[name])
+      if (name === 'className') {
+        if (typeof element.props[name] === 'string') {
+          dom.className = element.props[name]
+        } else if (typeof element.props[name] === 'object') {
+          Object.keys(element.props[name]).forEach((cls) => {
+            if (element.props[name][cls]) dom.classList.add(cls)
+            else dom.classList.remove(cls)
+          })
+        }
       }
       if (name === 'style' && typeof element.props[name] === 'object') {
         Object.assign(dom.style, element.props[name])
@@ -62,7 +69,14 @@ export function updateDom(dom, prevProps, nextProps) {
     .filter(isNew(prevProps, nextProps))
     .forEach((name) => {
       if (name === 'style') {
-        Object.assign(dom.style, nextProps[name] || {})
+        // 清理旧样式
+        Object.keys(prevProps.style || {}).forEach((styleName) => {
+          if (!(nextProps.style && styleName in nextProps.style)) {
+            dom.style[styleName] = ''
+          }
+        })
+        // 设置新样式
+        Object.assign(dom.style, nextProps.style || {})
       } else {
         dom[name] = nextProps[name]
       }

@@ -4,9 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  myreact: link:../../../.local/share/pnpm/global/5/node_modules/myreact
+
 importers:
 
   .:
+    dependencies:
+      myreact:
+        specifier: link:../../../.local/share/pnpm/global/5/node_modules/myreact
+        version: link:../../../.local/share/pnpm/global/5/node_modules/myreact
     devDependencies:
       '@babel/cli':
         specifier: ^7.28.6

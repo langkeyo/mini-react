@@ -32,5 +32,7 @@ export function memo(component, propsAreEqual) {
   }
 }
 
+export function Fragment() {}
+
 export { createElement, render, useState, useEffect, useMemo, useCallback }
 export default MyReact
